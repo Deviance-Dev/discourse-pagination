@@ -25,7 +25,7 @@ after_initialize do
     def total_topics
       # Topic.listable_topics.where(archetype: Archetype.default).count
       #@cat = Category.where(name_lower: params[:categoryName]).first || Category.first
-      tc = Topic.listable_topics.where("category_id = ?", params[:categoryName])).count
+      tc = Topic.listable_topics.where("category_id = ?", params[:categoryName]).count
       render :json => {success: true, total: tc}
     end
   end
