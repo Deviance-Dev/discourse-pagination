@@ -20,14 +20,13 @@ after_initialize do
   class ::InfluxPagination::PaginationController < ::ApplicationController
     requires_plugin InfluxPagination::PLUGIN_NAME
 
-    skip_before_action :check_xhr, :redirect_to_login_if_required
-    skip_before_action :require_login
-
+    skip_before_action :check_xhr
+    
     def total_topics
       # Topic.listable_topics.where(archetype: Archetype.default).count
       @cat = Category.where(name_lower: params[:categoryName]).first || Category.first
       tc = Topic.listable_topics.where("category_id = ?", @cat.id).count
-      render :json => {success: true, total: tc}
+      render :json => {success: true, total: tc, cat: @cat.id}
     end
   end
 
