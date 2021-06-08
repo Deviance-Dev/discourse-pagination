@@ -21,7 +21,7 @@ after_initialize do
     requires_plugin InfluxPagination::PLUGIN_NAME
 
     skip_before_action :check_xhr, :redirect_to_login_if_required
-    # skip_before_action :require_login
+    skip_before_action :require_login
 
     def total_topics
       # Topic.listable_topics.where(archetype: Archetype.default).count
